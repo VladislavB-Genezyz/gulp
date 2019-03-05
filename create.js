@@ -36,7 +36,7 @@ fs.writeFile("./source/styles/main.sass", sassTemplate, function(err) {
 	}
 });
 /* ---------- Create Pug main file ------------- */
-let pugTemplate = "doctype htlm\nhtml(lang='en')\n	header\n		title Some Title\n		meta(charset='utf-8')\n		meta(name='viewport', content='width=device-width, initial-scale=1.0')\n		link(rel='stylesheet', href='/styles/main.min.css')\n		script(src='js/main.js')\n	body\n		header\n		main\n		footer"
+let pugTemplate = "doctype htlm\nhtml(lang='en')\n	header\n		title Some Title\n		meta(charset='utf-8')\n		meta(name='viewport', content='width=device-width, initial-scale=1.0')\n		link(rel='stylesheet', href='styles/main.min.css')\n		script(src='js/main.js')\n	body\n		header\n		main\n		footer"
 fs.writeFile("./source/template/index.pug", pugTemplate, function(err) {
 	if(err) {
 		return console.log(err);
