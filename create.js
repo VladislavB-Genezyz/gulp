@@ -29,7 +29,7 @@ createFiles.forEach(function(item,index,arr){
 	fs.openSync(item, 'a');
 });
 /* ---------- Create Sass main file ------------- */
-let sassTemplate ='@import "normalize"\n/* Custom styles */\n* {\n 	box-sizing: border-box  \n} '
+let sassTemplate ='@import "normalize"\n/* Custom styles */\n* \n 	box-sizing: border-box  \n '
 fs.writeFile("./source/styles/main.sass", sassTemplate, function(err) {
 	if(err) {
 		return console.log(err);
