@@ -69,7 +69,7 @@
 
 
 	/* ------------ Styles compile ------------- */
-	gulp.task('styles:compile', function () {
+	gulp.task('styles:compile-min', function () {
 
 		return gulp.src(css.in)
 				.pipe(sass({
@@ -82,6 +82,21 @@
 					cascade: false
 				}))
 				.pipe(rename('main.min.css'))
+				.pipe(gulp.dest(css.out));
+	});
+		/* ------------ Styles compile ------------- */
+	gulp.task('styles:compile', function () {
+
+		return gulp.src(css.in)
+				.pipe(sass({
+					includePaths: require('node-normalize-scss').includePaths
+				})
+				.on('error', sass.logError))
+				.pipe(autoprefixer({
+					browsers: ['last 4 versions'],
+					cascade: false
+				}))
+				.pipe(rename('main.css'))
 				.pipe(gulp.dest(css.out));
 	});
 
@@ -157,6 +172,7 @@
 	/* ------------ Watchers ------------- */
 	gulp.task('watch', function() {
 		gulp.watch(the_pug.watch, gulp.series('templates:compile'));
+		gulp.watch(css.watch, gulp.series('styles:compile-min'));
 		gulp.watch(css.watch, gulp.series('styles:compile'));
 		gulp.watch(js.in, gulp.series('babel'));
 		gulp.watch('source/js/**/*.coffee' , gulp.series('coffeScript:compile'));
@@ -165,7 +181,7 @@
 	/* ------------- Default ------------- */
 	gulp.task('default', gulp.series(
 		'clean',
-		gulp.parallel('templates:compile', 'styles:compile', 'sprite', 'copy','babel','coffeScript:compile'),
+		gulp.parallel('templates:compile', 'styles:compile','styles:compile-min', 'sprite', 'copy','babel','coffeScript:compile'),
 		gulp.parallel('watch', 'server')
 	)
 );
