@@ -11,6 +11,7 @@
 	const babel = require('gulp-babel');
 	const eslint = require('gulp-eslint');
 	const imagemin = require('gulp-imagemin');
+	const cssbeautify = require('gulp-cssbeautify');
 
 	/*********************** Variables with source ****************/
 
@@ -95,6 +96,11 @@
 				.pipe(autoprefixer({
 					browsers: ['last 4 versions'],
 					cascade: false
+				}))
+				.pipe(cssbeautify({
+					indent: '  ',
+					openbrace: 'end-of-line',
+					autosemicolon: true
 				}))
 				.pipe(rename('main.css'))
 				.pipe(gulp.dest(css.out));
